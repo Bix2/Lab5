@@ -1,21 +1,16 @@
-var express = require('express');
-var router = express.Router();
-const Poll = require('./../models/Poll');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const Poll = require('../models/Poll');
 
-/* GET home page. */
+/* GET HOME PAGE */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Poll' });
+  res.render('index', { title: 'Vote' });
 });
 
-router.post('/createpost', (req, res, next) => {
-  let pollData = new Poll(req.body);
-  pollData.save()
-    .then(item => {
-      res.send("Name saved to database");
-    })
-    .catch(err => {
-      res.status(400).send("Unable to save to database");
-    });
+/* GET FORM FOR ADDING NEW POLL */
+router.get('/createpoll', (req, res, next) => {
+  res.render('createpoll', { title: 'Create Poll' });
 });
 
 module.exports = router;
