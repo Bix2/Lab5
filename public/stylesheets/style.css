@@ -1,8 +1,59 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #333;
+  color: #ffffff;
 }
 
 a {
-  color: #00B7FF;
+  color: #2EBC99;
+  text-decoration: none;
+}
+
+label{
+  display: block;
+  margin: 15px 0px 5px 0px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.form-control {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border: 1px solid #C2C2C2;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  padding: 7px;
+  outline: none;
+}
+
+.button {
+  border: none;
+  padding: 8px 15px 8px 15px;
+  background:#2EBC99;
+  color: #fff;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  text-transform: uppercase;
+}
+
+input[type="submit"]{
+  border: none;
+  padding: 8px 15px 8px 15px;
+  background:#2EBC99;
+  color: #fff;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
+input[type="submit"]:hover {
+  background: #2EBC99;
+  color: #fff;
 }
