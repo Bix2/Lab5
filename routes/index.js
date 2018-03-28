@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-var question, answer1, answer2;
+const Poll = require('../models/Poll');
 
 /* GET HOME PAGE */
 router.get('/', (req, res, next) => {
