@@ -1,17 +1,12 @@
 extends layout
 
 block content
-  h1.live Start creating a poll
-  .container
-    .votes(style='display:none;')
-      .vote.vote1
-        span 0%
-      .vote.vote2
-        span 0%
-    .choices(style='display:none;')
-      .choice.choice1(data-id='1')
-        p
-      .choice.choice2(data-id='2')
-        p
-    div
-      a.button(href='/createpoll', target='_blank') Create a poll
+  h1.title--live
+  .choices.choice1
+    p.text
+    span.voteCount 
+  .choices.choice2
+    p.text
+    span.voteCount 
+    
+  a.button(href='/createpoll', target='_blank') Create a poll
