@@ -28,6 +28,12 @@ primus.on('data', function(data) {
   }
 });
 
+/*
+*
+* SUBMIT FORM
+*
+*/
+
 $(document).ready(function() {
 
   var submitPoll = $(".submit");
@@ -41,11 +47,36 @@ $(document).ready(function() {
       })
       e.preventDefault();
     });
-  }
+
 /*
 *
 * VOTE FOR OPTIONS
 *
 */
+
+  } else {
+    $(".choice1").click(function() {
+      vote("1");
+    })
+
+    $(".choice2").click(function() {
+      vote("2");
+    })
+  }
+
+  var countChoice1 = 0;
+  var countChoice2 = 0;
+
+  function vote(id) {
+    if (id == 1) {
+      countChoice1++;
+    } else if (id == 2) {
+      countChoice2++;
+    }
+  }
+
+
+
+  
 
 });
