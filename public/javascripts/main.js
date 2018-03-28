@@ -28,3 +28,24 @@ primus.on('data', function(data) {
   }
 });
 
+$(document).ready(function() {
+
+  var submitPoll = $(".submit");
+
+  if (submitPoll) {
+    submitPoll.click(function(e) {
+      primus.write({
+        question: $('#question').val(),
+        choice1: $('#option1').val(),
+        choice2: $('#option2').val(),
+      })
+      e.preventDefault();
+    });
+  }
+/*
+*
+* VOTE FOR OPTIONS
+*
+*/
+
+});
