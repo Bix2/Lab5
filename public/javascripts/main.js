@@ -75,8 +75,18 @@ $(document).ready(function() {
     }
   }
 
+/*
+*
+* ANIMATION OF VOTING
+*
+*/
 
+  $(".choices").click(function() {
+    $(this).animate({
+      width: '+=100px'
+    }, 500);
 
-  
+    return false;
+  });
 
 });
