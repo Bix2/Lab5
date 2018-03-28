@@ -3,19 +3,23 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+
 const bodyParser = require ('body-parser');
 const mongoose = require('mongoose');
+
 const indexRouter = require('./routes/index');
-//const pollRouter = require('./routes/createpoll');
 
 const app = express();
-
-// mongoose
-mongoose.connect('mongodb://localhost/polls');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+// mongoose
+mongoose.connect('mongodb://localhost/polls', function (err) {
+   if (err) throw err;
+   console.log('Successfully connected');
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -25,7 +29,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json());
 app.use('/', indexRouter);
-//app.use('/createpoll', pollRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
