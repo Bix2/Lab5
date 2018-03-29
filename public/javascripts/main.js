@@ -68,18 +68,17 @@ $(document).ready(function() {
       })
       vote("2");
     })
-  }
 
-  var countChoice1 = 0;
-  var countChoice2 = 0;
-
-  function vote(id) {
-    if (id == 1) {
-      countChoice1++;
-    } else if (id == 2) {
-      countChoice2++;
+    var countChoice1 = 0;
+    var countChoice2 = 0;
+  
+    function vote(id) {
+      if (id == 1) {
+        countChoice1++;
+      } else if (id == 2) {
+        countChoice2++;
+      }
     }
-  }
 
 /*
 *
@@ -87,12 +86,12 @@ $(document).ready(function() {
 *
 */
 
-  $(".choices").click(function() {
-    $(this).animate({
-      width: '+=100px'
-    }, 500);
-
-    return false;
-  });
-
+    $(".choices").click(function() {
+      $(this).animate({
+        width: '+=100px'
+      }, 500);
+  
+      return false;
+    });
+  }
 });
