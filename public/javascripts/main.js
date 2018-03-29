@@ -56,10 +56,16 @@ $(document).ready(function() {
 
   } else {
     $(".choice1").click(function() {
+      prims.write({
+        action: "vote"
+      })
       vote("1");
     })
 
     $(".choice2").click(function() {
+      prims.write({
+        action:"vote"
+      })
       vote("2");
     })
   }
