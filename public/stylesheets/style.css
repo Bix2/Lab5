@@ -58,22 +58,46 @@ input[type="submit"]:hover {
   color: #fff;
 }
 
-.choices {
-  font-weight: bold;
-  letter-spacing: -3px;
-  background:#333;
-  margin-bottom: 15px;
+h1.title--live {
+  font-size: 2.5em;
+  margin-bottom: 1em;
+}
+
+.feedback {
+  display: none;
+}
+
+.options {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 2em;
+  margin-top: 2em;
+}
+
+.option {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.option p {
+  grid-column: 1/span 1;
+  text-decoration: underline;
+}
+
+.count {
+  background: #2EBC99;
   padding: 10px;
-  font-size: 34px;
-  color: #ffffff;
-  width: 400px;
+  padding-right: 2em;
   -webkit-border-radius: 0.5em;
   -moz-border-radius: 0 0.5em 0.5em 0;
   border-radius: 0 1.5em 1.5em 0;
+  grid-column: 2 / span 1;
+  align-self: center;
+  visibility: hidden;
+  width: 0;
 }
 
-.choices p {
-  margin: 0px;
-  font-size: 30px;
-  display: inline-block;
+.count span {
+  font-size: 0.8em;
+  color: #ffffff;
 }
