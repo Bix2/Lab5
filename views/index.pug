@@ -1,12 +1,18 @@
 extends layout
 
 block content
-  h1.title--live
-  .choices.choice1
-    p.text
-    span.voteCount 
-  .choices.choice2
-    p.text
-    span.voteCount 
-    
-  a.button(href='/createpoll', target='_blank') Create a poll
+  div.poll-container
+    h1.title--live
+    p.feedback Start voting now! Remember, you can only vote once.
+    .options
+      //option 1
+      .option(data-id="1")
+        p.opt1
+        .count.count1
+          span
+      //option 2
+      .option(data-id="2")
+        p.opt2
+        .count.count2
+          span
+    a.button(href='/createpoll', target='_blank') Create a poll
