@@ -7,91 +7,87 @@ var primus = Primus.connect(url, {
     }
 });
 
-
 /*
-*
-* HANDLING INCOMING REQUESTS
-*
+* * * * * * * * * 
+*  CREATE POLL  *
+* * * * * * * * *
 */
 
-primus.on('data', function(data) {
-  var question = $('.title--live');
-  var choice1 = $('.choice1 p.text');
-  var choice2 = $('.choice2 p.text');
-  
-  if(question){
-    question.html(data.question);
-    choice1.html(data.choice1);
-    choice2.html(data.choice2);
-    $('.button').css({display: "none" });
-    $('.choices').css({background: "#2EBC99"});
-  }
+var submitPoll = $(".submit");
+
+if (submitPoll) {
+  submitPoll.click(function(e) {
+    var question = $('#question').val();
+    var choice1 = $('#opt1').val();
+    var choice2 = $('#opt2').val();
+    primus.write({ 
+      // write polldata
+      question: question,
+      option1: choice1,
+      option2: choice2,
+    })
+    e.preventDefault();
+  });
+}
+
+
+/*
+* * * * * * * * * 
+*  VOTE IN POLL *
+* * * * * * * * *
+*/
+
+$(".option").on('click', function(e) {
+  // only vote once
+  if ($(this).hasClass('clicked')) return; 
+  $(".option").addClass('clicked') 
+    .off('click');
+    $('.feedback').html("Vote submitted!")
+    primus.write({ 
+      action: "vote",
+      optionID: this.dataset.id,
+    });
+    e.preventDefault();
 });
 
-/*
-*
-* SUBMIT FORM
-*
-*/
 
-$(document).ready(function() {
+var count1 = 0;
+var count2 = 0;
+var total = 0;
 
-  var submitPoll = $(".submit");
+primus.on("data", function(data) {
+  // console.log(data);
 
-  if (submitPoll) {
-    submitPoll.click(function(e) {
-      primus.write({
-        question: $('#question').val(),
-        choice1: $('#option1').val(),
-        choice2: $('#option2').val(),
-      })
-      e.preventDefault();
-    });
-
-/*
-*
-* VOTE FOR OPTIONS
-*
-*/
-
-  } else {
-    $(".choice1").click(function() {
-      prims.write({
-        action: "vote"
-      })
-      vote("1");
-    })
-
-    $(".choice2").click(function() {
-      prims.write({
-        action:"vote"
-      })
-      vote("2");
-    })
-
-    var countChoice1 = 0;
-    var countChoice2 = 0;
+  var pollTitle = $(".title--live");
+  if (pollTitle) {
+    pollTitle.html(data.question);
+    $(".opt1").html(data.option1);
+    $(".opt2").html(data.option2);
+    $('.button').css({display: "none"});
+    $('.feedback').css({display: "block"});
   
-    function vote(id) {
-      if (id == 1) {
-        countChoice1++;
-      } else if (id == 2) {
-        countChoice2++;
-      }
+    /*
+    * * * * * * * * * * * * *  * 
+    *  HANDLING INCOMING VOTES *
+    * * * * * * * * * * * * *  *
+    */
+
+    if (data.action == "vote" && data.optionID == "1") {
+      count1++;
+      total++;
+      $('.count').css({visibility: "visible"}, {width:"0"});
+      $('.count1 span').html(Math.floor(parseInt((count1/total)*100).toFixed(0)) + '%');
+      $('.count2 span').html(Math.floor(parseInt((count2/total)*100).toFixed(0)) + '%');
+      $('.count1').animate({width: '+=20px'}, 500);
     }
-
-/*
-*
-* ANIMATION OF VOTING
-*
-*/
-
-    $(".choices").click(function() {
-      $(this).animate({
-        width: '+=100px'
-      }, 500);
   
-      return false;
-    });
+    if (data.action == "vote" && data.optionID == "2") {
+      count2++;
+      total++;
+      $('.count').css({visibility: "visible"}, {width:"0"});
+      $('.count1 span').html(Math.floor(parseInt((count1/total)*100).toFixed(0)) + '%');
+      $('.count2 span').html(Math.floor(parseInt((count2/total)*100).toFixed(0)) + '%');
+      $('.count2').animate({width: '+=20px'}, 500);
+    } 
   }
-});
+});      
